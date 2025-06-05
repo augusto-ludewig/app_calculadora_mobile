@@ -8,20 +8,19 @@
     tools:context=".MainActivity">
 
     <TextView
-        android:id="@+id/calculadora_title"
+        android:id="@+id/appName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="@string/title_calculadora"
+        android:layout_marginTop="72dp"
+        android:text="@string/appTitle"
         android:textAppearance="@style/TextAppearance.AppCompat.Display1"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:text="Calculadora" />
+        tools:text="Calcular IMC" />
 
     <EditText
-        android:id="@+id/primeiro_numero"
+        android:id="@+id/altura"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="48dp"
@@ -29,16 +28,16 @@
         android:layout_marginEnd="48dp"
         android:autofillHints=""
         android:ems="10"
-        android:hint="@string/primeiro_valor"
+        android:hint="@string/altura"
         android:inputType="numberDecimal"
         android:minHeight="48dp"
         android:textColorHint="#9D9D9D"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/calculadora_title" />
+        app:layout_constraintTop_toBottomOf="@id/appName" />
 
     <EditText
-        android:id="@+id/segundo_numero"
+        android:id="@+id/peso"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="48dp"
@@ -46,13 +45,128 @@
         android:layout_marginEnd="48dp"
         android:autofillHints=""
         android:ems="10"
-        android:hint="@string/segundo_numero"
+        android:hint="@string/peso"
         android:inputType="numberDecimal"
         android:minHeight="48dp"
-        android:textColorHint="#CECECE"
+        android:textColorHint="#9D9D9D"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/primeiro_numero" />
+        app:layout_constraintTop_toBottomOf="@+id/altura" />
+
+    <Button
+        android:id="@+id/buttonCalcular"
+        android:layout_width="140dp"
+        android:layout_height="57dp"
+        android:layout_marginTop="36dp"
+        android:onClick="calcularButtonOnClick"
+        android:text="@string/buttonCalcular"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/peso" />
+
+    <TextView
+        android:id="@+id/tituloTabelaReferencia"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/tituloTabelaReferencia"
+        android:textSize="20dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.509"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/resultado"
+        app:layout_constraintVertical_bias="0.094" />
+
+    <TextView
+        android:id="@+id/imcAbaixoDoPeso"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:background="#64B5F6"
+        android:text="@string/imcAbaixoDoPeso"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tituloTabelaReferencia"
+        app:layout_constraintVertical_bias="0.041" />
+
+    <TextView
+        android:id="@+id/imcSobrepeso"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:background="#DCE775"
+        android:text="@string/imcSobrepeso"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imcIdeal"
+        app:layout_constraintVertical_bias="0.064" />
+
+    <TextView
+        android:id="@+id/imcObesidadeGrau1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:background="#F64F6D"
+        android:text="@string/imcObesidadeGrau1"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imcSobrepeso"
+        app:layout_constraintVertical_bias="0.109" />
+
+    <TextView
+        android:id="@+id/imcObesidadeGrau"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:background="#F64F6D"
+        android:text="@string/imcObesidadeGrau2"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.509"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imcObesidadeGrau2"
+        app:layout_constraintVertical_bias="0.3" />
+
+    <TextView
+        android:id="@+id/imcObesidadeGrau2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:background="#F64F6D"
+        android:text="@string/imcObesidadeGrau2"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.503"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imcObesidadeGrau1"
+        app:layout_constraintVertical_bias="0.129" />
+
+    <TextView
+        android:id="@+id/imcIdeal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:background="#81C784"
+        android:text="@string/imcIdeal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imcAbaixoDoPeso"
+        app:layout_constraintVertical_bias="0.05" />
+
+    <TextView
+        android:id="@+id/resultado"
+        android:layout_width="367dp"
+        android:layout_height="109dp"
+        android:layout_marginTop="36dp"
+        android:textAlignment="center"
+        android:textSize="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/buttonCalcular" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

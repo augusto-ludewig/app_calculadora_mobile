@@ -1,6 +1,14 @@
 <resources>
-    <string name="app_name">PrimeiroApp</string>
-    <string name="title_calculadora">Calculadora</string>
-    <string name="primeiro_numero">Primeiro número</string>
-    <string name="segundo_numero">Segundo número</string>
+    <string name="appName">PrimeiroApp</string>
+    <string name="appTitle">Calcule seu IMC</string>
+    <string name="peso">Seu peso em KG</string>
+    <string name="altura">Sua altura</string>
+    <string name="buttonCalcular">Calcular</string>
+    <string name="tituloTabelaReferencia">Valores de Referência</string>
+    <string name="imcAbaixoDoPeso">Abaixo do peso: IMC menor que 18,5</string>
+    <string name="imcIdeal">Peso normal: IMC entre 18,5 e 24,9</string>
+    <string name="imcSobrepeso">Sobrepeso: IMC entre 25 e 29,9</string>
+    <string name="imcObesidadeGrau1">Obesidade grau |: IMC a entre 30 e 34,9</string>
+    <string name="imcObesidadeGrau2">Obesidade grau ||: IMC a entre 35 e 39,9</string>
+    <string name="imcObesidadeGrau3">Obesidade grau |||: IMC maior que 40</string>
 </resources>

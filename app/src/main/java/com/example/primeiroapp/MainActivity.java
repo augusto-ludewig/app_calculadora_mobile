@@ -15,10 +15,10 @@ import androidx.core.view.WindowInsetsCompat;
 
 public class MainActivity extends AppCompatActivity {
 
-    TextView tituloApp;
+    TextView appTitle;
     TextView resultado;
     EditText inputPeso;
-    EditText inputNumber;
+    EditText inputAltura;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,47 +27,48 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main); // Chama a classe do package R (res) - layout - arquivo xml
         Log.d("LifeCicle","onCreated");
 
-        tituloApp = findViewById(R.id.calculadora_title);
-        tituloApp.setText("Calculado");
-
-
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
-            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
-            return insets;
-        });
+        appTitle = findViewById(R.id.appName);
+        resultado = findViewById(R.id.resultado);
+        inputPeso = findViewById(R.id.peso);
+        inputAltura = findViewById(R.id.altura);
     }
 
-    public void calcularButtonOnClick(View v){
-        Toast.makeText(MainActivity.this, "Calculando", Toast.LENGTH_LONG).show();
+    public void calcularButtonOnClick(View v) {
+        String estadoSaude;
+        String aux1 = inputPeso.getText().toString();
+        double peso = Double.parseDouble(aux1);
+        String aux2 = inputAltura.getText().toString();
+        double altura = Double.parseDouble(aux2);
+        double resultImc = peso/(altura*altura);
+
+        resultado.setText("Seu IMC é: " + String.format("%.2f", resultImc) + " kg/m2\n"
+        + verificarSaude(resultImc));
     }
 
-    @Override
-    protected void onStart(){
-        super.onStart();
-        Log.v("LifeCicle","onStart");
-    }
-    @Override
-    protected void onResume(){
-        super.onResume();
-        Log.w("LifeCicle","onResume");
+    public String verificarSaude(double imc){
+        StringBuilder sb = new StringBuilder();
+        String recomendado = "";
+        sb.append("De acordo com a Organização Mundial da Saúde, seu IMC ");
+
+        if(imc < 18.5) {
+            recomendado = "está abaixo do recomendado para a sua altura.";
+            sb.append(recomendado);
+            sb.append("Para manter o valor de IMC normal, seu ");
+            sb.append("peso pode variar entre 59.9 e 80.7 kg.");
+            return sb.toString();
+        } else if (imc >= 18.5 && imc <= 24.9){
+            recomendado = "é considerado normal para a sua altura. ";
+            sb.append(recomendado);
+            sb.append("Para manter o valor de IMC normal, seu ");
+            sb.append("peso pode variar entre 59.9 e 80.7 kg.");
+            return sb.toString();
+        } else {
+            recomendado = "está acima do recomendado para a sua altura. ";
+            sb.append(recomendado);
+            sb.append("Para manter o valor de IMC normal, seu ");
+            sb.append("peso pode variar entre 59.9 e 80.7 kg.");
+            return sb.toString();
+        }
     }
 
-    @Override
-    protected void onPause(){
-        super.onPause();
-        Log.e("LifeCicle","onPause");
-    }
-
-    @Override
-    protected void onStop(){
-        super.onStop();
-        Log.wtf("LifeCicle","onStop");
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        Log.v("LifeCicle","onDestroy");
-    }
 }
