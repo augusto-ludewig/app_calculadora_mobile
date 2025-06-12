@@ -1,17 +1,15 @@
 package com.example.primeiroapp;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -34,7 +32,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void calcularButtonOnClick(View v) {
-        String estadoSaude;
         String aux1 = inputPeso.getText().toString();
         double peso = Double.parseDouble(aux1);
         String aux2 = inputAltura.getText().toString();
@@ -42,33 +39,44 @@ public class MainActivity extends AppCompatActivity {
         double resultImc = peso/(altura*altura);
 
         resultado.setText("Seu IMC é: " + String.format("%.2f", resultImc) + " kg/m2\n"
-        + verificarSaude(resultImc));
+        + verificarSaude(resultImc, altura));
     }
 
-    public String verificarSaude(double imc){
+    public String verificarSaude(double imc, double altura){
         StringBuilder sb = new StringBuilder();
-        String recomendado = "";
+        String pesoMaxMin = calcularPesoMaxMin(altura);
         sb.append("De acordo com a Organização Mundial da Saúde, seu IMC ");
-
         if(imc < 18.5) {
-            recomendado = "está abaixo do recomendado para a sua altura.";
-            sb.append(recomendado);
+            sb.append("está abaixo do recomendado para a sua altura.");
             sb.append("Para manter o valor de IMC normal, seu ");
-            sb.append("peso pode variar entre 59.9 e 80.7 kg.");
+            sb.append("peso pode variar entre ");
+            sb.append(pesoMaxMin);
             return sb.toString();
         } else if (imc >= 18.5 && imc <= 24.9){
-            recomendado = "é considerado normal para a sua altura. ";
-            sb.append(recomendado);
+            sb.append("é considerado normal para a sua altura. ");
             sb.append("Para manter o valor de IMC normal, seu ");
-            sb.append("peso pode variar entre 59.9 e 80.7 kg.");
+            sb.append("peso pode variar entre ");
+            sb.append(pesoMaxMin);
             return sb.toString();
         } else {
-            recomendado = "está acima do recomendado para a sua altura. ";
-            sb.append(recomendado);
+            sb.append("está acima do recomendado para a sua altura. ");
             sb.append("Para manter o valor de IMC normal, seu ");
-            sb.append("peso pode variar entre 59.9 e 80.7 kg.");
+            sb.append("peso pode variar entre ");
+            sb.append(pesoMaxMin);
             return sb.toString();
         }
+    }
+
+    // Calcula o peso mínimo e máximo ideal de acordo com a altura da pessoa
+    public String calcularPesoMaxMin(double altura) {
+        double pesoMin = 18.5 * altura * altura;
+        double pesoMax = 24.9 * altura * altura;
+        return String.format("peso pode variar entre %.2f e %.2f Kg.", pesoMin, pesoMax);
+    }
+
+    public void goToSecondEmptyActivityButtonOnClick(View v){
+        Intent view = new Intent(MainActivity.this, SecondMainActivity.class);
+        startActivity(view);
     }
 
 }
